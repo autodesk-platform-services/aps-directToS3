@@ -1,10 +1,50 @@
 # Forge-directToS3
 
-This repo contains samples on Node.js and .NET for the new binary transfer in Autodesk Forge services.
+![Platforms](https://img.shields.io/badge/platform-Windows|MacOS-lightgray.svg)
+![.NET](https://img.shields.io/badge/.NET%20Core-3.1-blue.svg)
 
-You can refer to the specific branch of your preference to start taking advantage of it.
+[![oAuth2](https://img.shields.io/badge/oAuth2-v1-green.svg)](http://developer.autodesk.com/)
+[![Data-Management](https://img.shields.io/badge/Data%20Management-v2-green.svg)](http://developer.autodesk.com/)
+[![BIM360](https://img.shields.io/badge/BIM360-v1-green.svg)](http://developer.autodesk.com/)
+[![ACC](https://img.shields.io/badge/ACC-v1-green.svg)](http://developer.autodesk.com/)
 
-You can refer to [.NET Core 3.1](https://github.com/Autodesk-Forge/forge-directToS3/tree/netcoreapp3.1), [.NET 6](https://github.com/Autodesk-Forge/forge-directToS3/tree/net6.0) (both differ on csproj and program.cs due to implicit usings) or [Node.js](https://github.com/Autodesk-Forge/forge-directToS3/tree/node) samples.
+# Description
+
+.NET sample fot new OSS upload method
+
+# Setup
+
+## Running locally
+
+- clone this repository or download
+- restore the packages (dotnet restore)
+- prepare an OSS bucket to upload your files to
+- replace the variable values at appsettings.json with your own
+
+```json
+{
+  "Forge_Client_Id": "YOUR CLIENT ID",
+  "Forge_Client_Secret": "YOUR CLIENT SECRET",
+  "BucketKey": "YOUR BUCKET KEY",
+  "ProjectId": "ID OF YOUR PROJECT PREFIXED WITH B.",
+  "Folder_Urn": "YOUR FOLDER URN"
+}
+```
+
+- run the commands below at cs project level to upload your local files
+- you can upload to a bucket or to a folder by the second argument passed
+
+### Uploading local file to OSS bucket (through FileStream)
+
+`dotnet run <path to local file> upload objectKey bucket`
+
+### Uploading local file to Docs Folder (through FileStream)
+
+`dotnet run <path to local file> upload objectKey docs`
+
+### Downloading file from OSS bucket (receiving the entire file into memory first)
+
+`dotnet run <path to local file> download objectKey bucket`
 
 ## How does it work?
 

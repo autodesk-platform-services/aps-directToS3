@@ -1,7 +1,7 @@
 ﻿# Forge-directToS3
 
 ![Platforms](https://img.shields.io/badge/platform-Windows|MacOS-lightgray.svg)
-![.NET](https://img.shields.io/badge/.NET-6.0-blue.svg)
+[![Node.js](https://img.shields.io/badge/Node.js-16.14.0-blue.svg)](https://nodejs.org/)
 
 [![oAuth2](https://img.shields.io/badge/oAuth2-v1-green.svg)](http://developer.autodesk.com/)
 [![Data-Management](https://img.shields.io/badge/Data%20Management-v2-green.svg)](http://developer.autodesk.com/)
@@ -10,47 +10,35 @@
 
 # Description
 
-.NET sample fot new OSS upload method
-
-# Setup
+Node.js utility for the new binary transfer in Autodesk Forge services.
 
 ## Running locally
 
-- clone this repository or download
-- restore the packages
-- prepare an OSS bucket to upload your files to
-- replace the variable values at appsettings.json with your own
+- clone this repository, and `cd` to the project folder in terminal
+- install Node.js dependencies: `yarn install`
+- prepare an OSS bucket to upload/download your files to/from
+- generate a Forge access token with `data:read`, `data:write`, and `data:create` scopes
+- run any of the scripts in the _test_ folder, for example:
 
-```json
-{
-  "Forge_Client_Id": "YOUR CLIENT ID",
-  "Forge_Client_Secret": "YOUR CLIENT SECRET",
-  "BucketKey": "YOUR BUCKET KEY",
-  "ProjectId": "ID OF YOUR PROJECT PREFIXED WITH B.",
-  "Folder_Urn": "YOUR FOLDER URN"
-}
-```
+### Uploading local file to OSS bucket (loading the entire file into memory first)
 
-- run the commands below at cs project level to upload your local files
-- you can upload to a bucket or to a folder by the second argument passed
+`node test/upload-buffer.js <path to local file> <bucket key> <object key> <access token>`
 
-### Uploading local file to OSS bucket (through FileStream)
+### Uploading local file to OSS bucket (as a stream)
 
-Please provide the path to your local file (i.e `C:\Users\Harun\Desktop\Technicalschoolcurrentm.rvt`) and object key (i.e `Technicalschoolcurrentm.rvt`)
+`node test/upload-stream.js <path to local file> <bucket key> <object key> <access token>`
 
-`dotnet run <path to local file> upload <objectKey> bucket`
+### Downloading OSS object to local file (receiving the entire file into memory first)
 
-### Uploading local file to Docs Folder (through FileStream)
+`node test/download-buffer.js <path to local file> <bucket key> <object key> <access token>`
 
-Please provide the path to your local file (i.e `C:\Users\Harun\Desktop\Technicalschoolcurrentm.rvt`) and object key (i.e `Technicalschoolcurrentm.rvt`)
+### Downloading OSS object to local file (as a stream)
 
-`dotnet run <path to local file> upload <objectKey> docs`
+`node test/download-stream.js <path to local file> <bucket key> <object key> <access token>`
 
-### Downloading file from OSS bucket (receiving the entire file into memory first)
+### Uploading local file to a Data Management hub (such as BIM 360, Fusion Teams, or ACC)
 
-Please provide the path to your local file (i.e `C:\Users\Harun\Desktop\Technicalschoolcurrentm.rvt`) and object key (i.e `Technicalschoolcurrentm.rvt`)
-
-`dotnet run <path to local file> download <objectKey> bucket`
+`node test/upload-to-hub.js <path to local file> <project id> <folder id> <access token>`
 
 ## How does it work?
 

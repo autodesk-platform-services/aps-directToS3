@@ -1,4 +1,4 @@
-﻿# Forge-directToS3
+﻿# Aps-directToS3
 
 ![Platforms](https://img.shields.io/badge/platform-Windows|MacOS-lightgray.svg)
 [![Node.js](https://img.shields.io/badge/Node.js-16.14.0-blue.svg)](https://nodejs.org/)
@@ -10,14 +10,14 @@
 
 # Description
 
-Node.js utility for the new binary transfer in Autodesk Forge services.
+Node.js utility for the new binary transfer in Autodesk Platform Services.
 
 ## Running locally
 
 - clone this repository, and `cd` to the project folder in terminal
 - install Node.js dependencies: `yarn install`
 - prepare an OSS bucket to upload/download your files to/from
-- generate a Forge access token with `data:read`, `data:write`, and `data:create` scopes
+- generate a APS access token with `data:read`, `data:write`, and `data:create` scopes
 - run any of the scripts in the _test_ folder, for example:
 
 ### Uploading local file to OSS bucket (loading the entire file into memory first)

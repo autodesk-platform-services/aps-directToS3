@@ -9,8 +9,8 @@ class BinaryTransferClient {
      * by this client. For long-running operations the token could potentially expire,
      * so consider modifying this class to refresh the token whenever needed.
      *
-     * @param {string} token Access token to use when communicating with Autodesk Forge services.
-     * @param {string} [host="https://developer.api.autodesk.com"] Optional Autodesk Forge host).
+     * @param {string} token Access token to use when communicating with Autodesk Platform services.
+     * @param {string} [host="https://developer.api.autodesk.com"] Optional Autodesk Platform Services host).
      */
     constructor(token, host) {
         this.token = token;

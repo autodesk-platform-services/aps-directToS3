@@ -1,7 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Forge_Upload_DirectToS3.test
+namespace Aps_Upload_DirectToS3.test
 {
   public class upload_to_bucket
   {

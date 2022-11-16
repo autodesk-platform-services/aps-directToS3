@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Forge_Upload_DirectToS3</RootNamespace>
+    <RootNamespace>Aps_Upload_DirectToS3</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

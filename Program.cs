@@ -1,9 +1,9 @@
-using Forge_Upload_DirectToS3.test;
+using Aps_Upload_DirectToS3.test;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
-namespace Forge_Upload_DirectToS3
+namespace Aps_Upload_DirectToS3
 {
   class Program
   {
@@ -16,8 +16,8 @@ namespace Forge_Upload_DirectToS3
         BinarytransferClient.BASE_URL = "https://developer.api.autodesk.com/oss/v2";
         BinarytransferClient.MAX_RETRY = 5;
         BinarytransferClient.UPLOAD_CHUNK_SIZE = 5 * 1024 * 1024;
-        BinarytransferClient.CLIENT_ID = configuration.GetSection("Forge_Client_Id").Value;
-        BinarytransferClient.CLIENT_SECRET = configuration.GetSection("Forge_Client_Secret").Value;
+        BinarytransferClient.CLIENT_ID = configuration.GetSection("Aps_Client_Id").Value;
+        BinarytransferClient.CLIENT_SECRET = configuration.GetSection("Aps_Client_Secret").Value;
 
         string bucketKey = configuration.GetSection("BucketKey").Value;
         string projectId = configuration.GetSection("ProjectId").Value;

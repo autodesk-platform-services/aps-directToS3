@@ -1,10 +1,10 @@
-# Forge-directToS3
+# APS-directToS3
 
-This repo contains samples on Node.js and .NET for the new binary transfer in Autodesk Forge services.
+This repo contains samples on Node.js and .NET for the new binary transfer in Autodesk Platform Services.
 
 You can refer to the specific branch of your preference to start taking advantage of it.
 
-You can refer to [.NET Core 3.1](https://github.com/Autodesk-Forge/forge-directToS3/tree/netcoreapp3.1), [.NET 6](https://github.com/Autodesk-Forge/forge-directToS3/tree/net6.0) (both differ on csproj and program.cs due to implicit usings) or [Node.js](https://github.com/Autodesk-Forge/forge-directToS3/tree/node) samples.
+You can refer to [.NET Core 3.1](https://github.com/autodesk-platform-services/aps-directToS3/tree/netcoreapp3.1), [.NET 6](https://github.com/autodesk-platform-services/aps-directToS3/tree/net6.0) (both differ on csproj and program.cs due to implicit usings) or [Node.js](https://github.com/autodesk-platform-services/aps-directToS3/tree/node) samples.
 
 ## How does it work?
 

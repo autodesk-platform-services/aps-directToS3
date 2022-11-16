@@ -2,7 +2,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Autodesk.Forge;
 
-namespace Forge_Upload_DirectToS3.test
+namespace Aps_Upload_DirectToS3.test
 {
   public class download_from_bucket
   {

@@ -9,7 +9,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Forge_Upload_DirectToS3
+namespace Aps_Upload_DirectToS3
 {
   public static class BinarytransferClient
   {

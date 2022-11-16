@@ -1,4 +1,4 @@
-﻿# Forge-directToS3
+﻿# APS-directToS3
 
 ![Platforms](https://img.shields.io/badge/platform-Windows|MacOS-lightgray.svg)
 ![.NET](https://img.shields.io/badge/.NET-6.0-blue.svg)
@@ -23,8 +23,8 @@
 
 ```json
 {
-  "Forge_Client_Id": "YOUR CLIENT ID",
-  "Forge_Client_Secret": "YOUR CLIENT SECRET",
+  "Aps_Client_Id": "YOUR CLIENT ID",
+  "Aps_Client_Secret": "YOUR CLIENT SECRET",
   "BucketKey": "YOUR BUCKET KEY",
   "ProjectId": "ID OF YOUR PROJECT PREFIXED WITH B.",
   "Folder_Urn": "YOUR FOLDER URN"

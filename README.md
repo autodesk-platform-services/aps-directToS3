@@ -10,7 +10,9 @@
 
 # Description
 
-.NET sample fot new OSS upload method
+.NET sample fot new OSS upload method.
+This sample was modified to work with the most recent version of Autodesk Forge .NET SDK 1.9.7.
+Please ensure you're using the proper version.
 
 # Setup
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -37,10 +38,11 @@ namespace Aps_Upload_DirectToS3
     public static async Task<dynamic> getUploadUrls(string bucketKey, string objectKey, int? minutesExpiration, int parts = 1, int firstPart = 1, string uploadKey = null)
     {
       string endpoint = $"/buckets/{bucketKey}/objects/{HttpUtility.UrlEncode(objectKey)}/signeds3upload";
+			string access_token = CREDENTIAL.access_token;
 
-      RestClient client = new RestClient(BASE_URL);
-      RestRequest request = new RestRequest(endpoint, RestSharp.Method.GET);
-      request.AddHeader("Authorization", "Bearer " + CREDENTIAL.access_token);
+			RestClient client = new RestClient(BASE_URL);
+      RestRequest request = new RestRequest(endpoint, RestSharp.Method.Get);
+      request.AddHeader("Authorization", "Bearer " + access_token);
       request.AddHeader("Content-Type", "application/json");
       request.AddParameter("parts", parts, ParameterType.QueryString);
       request.AddParameter("firstPart", firstPart, ParameterType.QueryString);
@@ -117,7 +119,7 @@ namespace Aps_Upload_DirectToS3
 
             try
             {
-              var responseBuffer = await UploadBufferRestSharp(currentUrl, fileBytes);
+              var responseBuffer = await UploadBufferHttpClient(currentUrl, fileBytes);
 
               int statusCode = (int)responseBuffer.StatusCode;
 
@@ -162,7 +164,7 @@ namespace Aps_Upload_DirectToS3
     public static async Task<dynamic> UploadBufferRestSharp(string url, byte[] buffer)
     {
       RestClient client = new RestClient();
-      RestRequest request = new RestRequest(url, RestSharp.Method.PUT);
+      RestRequest request = new RestRequest(url, RestSharp.Method.Put);
       request.AddParameter("", buffer, ParameterType.RequestBody);
 
       var response = await client.ExecuteAsync(request);
@@ -170,19 +172,37 @@ namespace Aps_Upload_DirectToS3
       return response;
     }
 
-    /// <summary>
-    /// Finalizes the upload of a file to OSS.
-    /// </summary>
-    /// <param name="bucketKey">Bucket key</param>
-    /// <param name="objectKey">Object key</param>
-    /// <param name="uploadKey">[uploadKey] Optional upload key if this is a continuation of a previously initiated upload</param>
-    public static async Task<dynamic> CompleteUpload(string bucketKey, string objectKey, string uploadKey)
+		/// <summary>
+		/// Upload the specific part through url
+		/// </summary>
+		/// <param name="url">URL to upload the specified part</param>
+		/// <param name="buffer">Buffer array to upload</param>
+		public static async Task<dynamic> UploadBufferHttpClient(string url, byte[] buffer)
+		{
+			var client = new HttpClient();
+			client.Timeout = TimeSpan.FromMinutes(30);
+			var httpContent = new ByteArrayContent(buffer);
+
+			var response = await client.PutAsync(url, httpContent);
+
+			return response;
+		}
+
+		/// <summary>
+		/// Finalizes the upload of a file to OSS.
+		/// </summary>
+		/// <param name="bucketKey">Bucket key</param>
+		/// <param name="objectKey">Object key</param>
+		/// <param name="uploadKey">[uploadKey] Optional upload key if this is a continuation of a previously initiated upload</param>
+		public static async Task<dynamic> CompleteUpload(string bucketKey, string objectKey, string uploadKey)
     {
       string endpoint = $"/buckets/{bucketKey}/objects/{HttpUtility.UrlEncode(objectKey)}/signeds3upload";
       RestClient client = new RestClient(BASE_URL);
-      RestRequest request = new RestRequest(endpoint, Method.POST);
+      RestRequest request = new RestRequest(endpoint, Method.Post);
 
-      request.AddHeader("Authorization", "Bearer " + CREDENTIAL.access_token);
+			string access_token = CREDENTIAL.access_token;
+
+			request.AddHeader("Authorization", "Bearer " + access_token);
       request.AddHeader("Content-Type", "application/json");
 
       request.AddJsonBody(new { uploadKey = $"{uploadKey}" });
@@ -201,9 +221,11 @@ namespace Aps_Upload_DirectToS3
     public static async Task<dynamic> getDownloadUrl(string bucketKey, string objectKey, int? minutesExpiration)
     {
       string endpoint = $"/buckets/{bucketKey}/objects/{HttpUtility.UrlEncode(objectKey)}/signeds3download";
-      RestClient client = new RestClient(BASE_URL);
-      RestRequest request = new RestRequest(endpoint, RestSharp.Method.GET);
-      request.AddHeader("Authorization", "Bearer " + CREDENTIAL.access_token);
+			string access_token = CREDENTIAL.access_token;
+
+			RestClient client = new RestClient(BASE_URL);
+      RestRequest request = new RestRequest(endpoint, RestSharp.Method.Get);
+      request.AddHeader("Authorization", "Bearer " + access_token);
       request.AddHeader("Content-Type", "application/json");
 
       if (minutesExpiration != null)
@@ -234,7 +256,7 @@ namespace Aps_Upload_DirectToS3
     public static byte[] DownloadBufferRestSharp(string url)
     {
       RestClient client = new RestClient();
-      RestRequest request = new RestRequest(url, RestSharp.Method.GET);
+      RestRequest request = new RestRequest(url, RestSharp.Method.Get);
 
       byte[] data = client.DownloadData(request);
 
